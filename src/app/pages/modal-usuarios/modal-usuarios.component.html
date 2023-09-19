@@ -1,0 +1,66 @@
+<div class="flex-col max-w-250 md:min-w-120 -m-6">
+    <div class="flex-col max-w-240 md:min-w-160">
+        <!-- <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
+            <div class="text-lg font-medium">Registro De usuarios</div>
+            <button mat-icon-button (click)="matDialogRef.close()" [tabIndex]="-1">
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+            </button>
+        </div> -->
+        <mat-dialog-content style="margin: 0px; padding: 0px;">
+
+            <form [formGroup]="formUser" class="items-start w-full p-4 sm:p-8 space-y-6 overflow-y-auto"
+                #signInNgForm="ngForm">
+                <div>
+                    <mat-form-field class="fieldsName" appearance="outline">
+                        <mat-label for="nombre">Nombre</mat-label>
+                        <input type="text" id="nombre" formControlName="nombre" matInput
+                            placeholder="Nombre">
+                        <!-- <mat-icon class="icon-size-5" matSuffix [svgIcon]="'heroicons_outline:calendar'"></mat-icon> -->
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="fields" appearance="outline">
+                        <mat-label for="cuenta">Cuenta</mat-label>
+                        <input type="mail" id="totalContrato" formControlName="cuenta" matInput
+                            placeholder="Cuenta">
+                        <!-- <mat-icon class="icon-size-5" matSuffix [svgIcon]="'heroicons_outline:calendar'"></mat-icon> -->
+                    </mat-form-field>
+                    <mat-form-field class="fields" appearance="outline">
+                        <mat-label for="clave">Contraseña</mat-label>
+                        <input type="password" id="clave" formControlName="clave" matInput
+                            placeholder="Contraseña">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="fields" appearance="outline">
+                        <mat-label for="tipoUsuario">Tipo  usuario</mat-label>
+                        <mat-select
+                        [value]="datosUsuario.tipoUsuario"
+                            [formControlName]="'tipoUsuario'" name="tipoUsuario">
+                            <mat-option *ngFor="let userType of usersType" [value]="userType.id">
+                                {{userType.descripcion}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="fields" appearance="outline">
+                        <mat-label for="estado">Estados</mat-label>
+                        <mat-select
+                            id="estado"
+                            [value]="datosUsuario.estado"
+                            [formControlName]="'estado'" name="estado">
+                            <mat-option *ngFor="let estado of estados" [value]="estado.value">
+                                {{estado.viewValue}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+            </form>
+        </mat-dialog-content>
+        <mat-dialog-actions class="action" align="end">
+            <button mat-flat-button [color]="'warn'" type="button" [mat-dialog-close]="false">Cancelar</button>
+            <button mat-flat-button [color]="'primary'" (click)="saveUsuario()"> 
+                <span>{{title}}</span></button>
+        </mat-dialog-actions>
+    </div>
+</div>
