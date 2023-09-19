@@ -1,0 +1,56 @@
+<div class="flex flex-col flex-auto min-w-0 m-10">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between py-8 px-6 md:px-8">
+        <div>
+            <div class="text-2xl md:text-5xl font-semibold tracking-tight leading-7 md:leading-snug truncate">
+                USUARIOS
+            </div>
+        </div>
+        <div class="mt-4 sm:mt-0">
+            <!-- Add section button -->
+            <button mat-flat-button [color]="'accent'" (click)="editarUsuario(null)" [matTooltip]="'agregar usuario'">
+                <mat-icon>
+                    <i class="fa-solid fa-user-plus"></i>
+                </mat-icon>
+                <i class="fa fa-heart"></i> <!-- Corazón de Font Awesome -->
+                <span class="ml-2 mr-1">Agregar usuario</span>
+            </button>
+            <!-- Add task button -->
+        </div>
+    </div>
+    <div class="w-full  mx-auto">
+        <table class="mat-elevation-z8 demo-table" mat-table matSort [dataSource]="dataSource" [trackBy]="trackByFn"
+            (matSortChange)="announceSortChange($event)">
+            <ng-container *ngFor="let columna of columnas" matColumnDef="{{columna.name}}" class="demo">
+                <th mat-header-cell class="centre" mat-sort-header *matHeaderCellDef>
+                    {{columna.title}}
+                </th>
+                <td *matCellDef="let element">
+                    <p *ngIf="element[columna.name]!= element.acciones && element[columna.name]!= element.estados" >
+                        {{element[columna.name]}}
+                    </p>
+                    <span
+                    *ngIf="element[columna.name]=== element.estados"
+                    class="inline-flex items-center font-bold text-xs px-2.5 py-0.5 rounded-full tracking-wide uppercase"
+                    [ngClass]="{'bg-blue-200 text-blue-800 dark:bg-blue-600 dark:text-red-50': element.estados == 'INACTIVO',                                       
+            'bg-green-200 text-green-800 dark:bg-green-600 dark:text-green-50': element.estados == 'ACTIVO'}">
+                    <span
+                        class="leading-relaxed whitespace-nowrap">{{element[columna.name]}}</span>
+                </span>
+                    <p *ngIf="columna.name=='acciones'">
+
+                        <button [matTooltip]="'Mostrar Contratistas'" style="margin-left: 3px !important;"
+                            class="hidden sm:inline-flex ml-3" (click)="editarUsuario(element)" mat-flat-button
+                            [color]="'accent'">
+                            Editar
+                        </button>
+                    </p>
+                </td>
+
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+            <tr mat-row *matRowDef="let row; columns: columnsToDisplay;">
+            </tr>
+        </table>
+
+    </div>
